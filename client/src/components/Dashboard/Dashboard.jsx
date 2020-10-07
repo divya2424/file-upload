@@ -42,26 +42,10 @@ class DashboardComponent extends Component {
     return true;
   };
 
-  checkFileSize = (event) => {
-    let files = event.target.files;
-    let size = 2000000;
-    let err = [];
-    for (var x = 0; x < files.length; x++) {
-      if (files[x].size > size) {
-        err[x] = files[x].type + "is too large, please pick a smaller file\n";
-      }
-    }
-    for (var z = 0; z < err.length; z++) {
-      // if message not same old that mean has error
-      // discard selected file
-      toast.error(err[z]);
-      event.target.value = null;
-    }
-    return true;
-  };
+
   onChangeHandler = (event) => {
     var files = event.target.files;
-    if (this.checkMimeType(event) && this.checkFileSize(event)) {
+    if (this.checkMimeType(event)) {
       // if return true allow to setState
       this.setState({
         selectedFile: files,
