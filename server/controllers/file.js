@@ -46,13 +46,7 @@ exports.postFile = function (req, res) {
 
 
 exports.getFiles = function (req, res) { 
-   let arr =  fs.readdirSync(folder, (err, files) => {
-        var fileArr = []
-        files.map(file => {
-          fileArr.push(file)
-        });
-        return fileArr
-      });
+    let arr = this.readFiles()
       if(arr.length > 0){
         res.send({'fileArr': arr.reverse()})
       }
@@ -61,6 +55,8 @@ exports.getFiles = function (req, res) {
       }
       
 }
+
+
 
 exports.removeFile = function (req, res) {
     let fileName = req.body.fileName
@@ -71,8 +67,18 @@ exports.removeFile = function (req, res) {
           console.error(err)
           res.status(400).send({'msg':'File Doesnt exist'})
         }
-      res.send({'msg':'File Unlinked Successfully'})
+        let arr = this.readFiles()
+        res.send({'msg':'File Unlinked Successfully','fileArr': arr.reverse()})
       })
  }
  
-
+ readFiles = ()=>{
+    let arr =  fs.readdirSync(folder, (err, files) => {
+        var fileArr = []
+        files.map(file => {
+            fileArr.push(file)
+        });
+        return fileArr
+        });
+    return arr
+    }

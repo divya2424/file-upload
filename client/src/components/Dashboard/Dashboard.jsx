@@ -106,7 +106,7 @@ class DashboardComponent extends Component {
 
   removeFile = (e, fileName) => {
     this.props.removeFile({ fileName: fileName });
-    this.props.fetchFiles();
+    // this.props.fetchFiles();
   };
 
   displayImages = () => {

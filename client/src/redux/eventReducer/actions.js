@@ -20,6 +20,7 @@ export const fetchFiles = () => (dispatch, getState) => {
       dispatch(hideLoader());
       if(response && response.fileArr){
         dispatch(receivedEvent(response.fileArr));
+        
       }
       
     })
@@ -43,8 +44,8 @@ export const removeFile = (data) => (dispatch, getState) => {
     body: JSON.stringify(data)})
     .then((responseJson) => {
       dispatch(hideLoader());
-      if(responseJson && responseJson.data){
-        dispatch(receivedEvent(responseJson.data));
+      if(responseJson && responseJson.fileArr){
+        dispatch(receivedEvent(responseJson.fileArr));
       }
     })
     .catch((err) => {
